@@ -1,0 +1,4 @@
+add-migration  （序号）
+
+开始创库
+update-database

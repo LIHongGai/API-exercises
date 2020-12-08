@@ -32,5 +32,13 @@ namespace FakeXiecheng.API.Models
         public string Notes { get; set; }
         public ICollection<TouristRoutePicture> TouristRoutePictures { get; set; } 
             = new List<TouristRoutePicture>();
+        //评分
+        public double? Rating { get; set; }
+        //旅游天数
+        public TraveIDays? TraveIDays { get; set; }
+        //旅游团
+        public TripType? TripType { get; set; }
+        //出发地
+        public DepartureCity? DepartureCity { get; set; }
     }
 }
