@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace FakeXiecheng.API.Services
 {
+    /// <summary>
+    /// 假的数据仓库
+    /// </summary>
     public class MockTouristRouteRepository : ITouristRouteRepository
     {
         private List<TouristRoute> _routes;
@@ -45,12 +48,13 @@ namespace FakeXiecheng.API.Services
 
         public IEnumerable<TouristRoute> GetTouristRoutes()
         {
+            //返回仓库的私有列表
             return _routes;
         }
 
         public TouristRoute GetTouristRoute(Guid touristRouteId)
         {
-            // linq
+            // linq  //返回路线数组中的一个元素， 下列用到的是 Linq语法
             return _routes.FirstOrDefault(n => n.Id == touristRouteId);
         }
     }

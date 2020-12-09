@@ -16,6 +16,7 @@ namespace FakeXiecheng.API
 {
     public class Startup
     {
+        //配置服务的依赖
         private IConfiguration Configuration { get; }
 
         public Startup(IConfiguration configuration)
@@ -27,6 +28,7 @@ namespace FakeXiecheng.API
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            //依赖注入
             services.AddControllers();
             services.AddTransient<ITouristRouteRepository, TouristRouteRepository>();
             //services.AddSingleton
