@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Mvc.Formatters;
 
 namespace FakeXiecheng.API
 {
@@ -29,7 +30,13 @@ namespace FakeXiecheng.API
         public void ConfigureServices(IServiceCollection services)
         {
             //ÒÀÀµ×¢Èë
-            services.AddControllers();
+            services.AddControllers(setupAction =>
+            {
+                setupAction.ReturnHttpNotAcceptable = true;
+                //setupAction.OutputFormatters.Add(
+                //    new XmlDataContractSerializerOutputFormatter()
+                //    );
+            }).AddXmlDataContractSerializerFormatters();
             services.AddTransient<ITouristRouteRepository, TouristRouteRepository>();
             //services.AddSingleton
             //services.AddScoped

@@ -20,10 +20,26 @@ namespace FakeXiecheng.API.Controllers
             _touristRouteRepository = touristRouteRepository;
         }
         //在HTTP Git函数中使用数据仓库并提取全部旅游路线的信息
+        [HttpGet]
         public IActionResult GerTouristRoutes()
         {
-            var routes = _touristRouteRepository.GetTouristRoutes();
-            return Ok(routes);
+            var touristRoutesFromRepo = _touristRouteRepository.GetTouristRoutes();
+            if(touristRoutesFromRepo == null || touristRoutesFromRepo.Count() <=0)
+            {
+                return NotFound("没有此路线");
+            }
+            return Ok(touristRoutesFromRepo );
+        }
+        //  api/touristroutes/{touristRouteId}
+        [HttpGet("{touristRouteId}")]
+        public IActionResult GetTouristRouteById(Guid touristRouteId)
+        {
+            var touristRouteFromRepo = _touristRouteRepository.GetTouristRoute(touristRouteId);
+            if(touristRouteFromRepo == null)
+            {
+                return NotFound($"旅游路线{touristRouteId}找不到");
+            }
+            return Ok(touristRouteFromRepo);
         }
     }
 }
