@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
+using FakeXiecheng.API.Dtos;
 using FakeXiecheng.API.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -14,10 +16,12 @@ namespace FakeXiecheng.API.Controllers
     {
         //数据仓库接口（私有的）
         private ITouristRouteRepository _touristRouteRepository;
+        private readonly IMapper _mapper;
         //建立构造函数
-        public TouristRoutesController(ITouristRouteRepository touristRouteRepository)
+        public TouristRoutesController(ITouristRouteRepository touristRouteRepository,IMapper mapper)
         {
             _touristRouteRepository = touristRouteRepository;
+            _mapper = mapper;
         }
         //在HTTP Git函数中使用数据仓库并提取全部旅游路线的信息
         [HttpGet]
@@ -28,7 +32,8 @@ namespace FakeXiecheng.API.Controllers
             {
                 return NotFound("没有此路线");
             }
-            return Ok(touristRoutesFromRepo );
+            var touristRoutesDto = _mapper.Map<IEnumerable<TouristRouteDto>>(touristRoutesFromRepo);
+            return Ok(touristRoutesDto);
         }
         //  api/touristroutes/{touristRouteId}
         [HttpGet("{touristRouteId}")]
@@ -39,7 +44,8 @@ namespace FakeXiecheng.API.Controllers
             {
                 return NotFound($"旅游路线{touristRouteId}找不到");
             }
-            return Ok(touristRouteFromRepo);
+            var touristRouteDto = _mapper.Map<TouristRouteDto>(touristRouteFromRepo);
+            return Ok(touristRouteDto);
         }
     }
 }

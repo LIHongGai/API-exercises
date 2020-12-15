@@ -379,3 +379,5 @@ D:\41李宏盖\XCAPI\XCAPI\FakeXiecheng.API\obj\Debug\netcoreapp3.1\FakeXiecheng
 D:\41李宏盖\XCAPI\XCAPI\FakeXiecheng.API\obj\Debug\netcoreapp3.1\FakeXiecheng.API.dll
 D:\41李宏盖\XCAPI\XCAPI\FakeXiecheng.API\obj\Debug\netcoreapp3.1\FakeXiecheng.API.pdb
 D:\41李宏盖\XCAPI\XCAPI\FakeXiecheng.API\obj\Debug\netcoreapp3.1\FakeXiecheng.API.genruntimeconfig.cache
+D:\41李宏盖\XCAPI\XCAPI\FakeXiecheng.API\bin\Debug\netcoreapp3.1\AutoMapper.dll
+D:\41李宏盖\XCAPI\XCAPI\FakeXiecheng.API\bin\Debug\netcoreapp3.1\AutoMapper.Extensions.Microsoft.DependencyInjection.dll

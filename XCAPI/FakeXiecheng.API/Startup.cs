@@ -12,6 +12,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Mvc.Formatters;
+using AutoMapper;
 
 namespace FakeXiecheng.API
 {
@@ -44,6 +45,8 @@ namespace FakeXiecheng.API
             services.AddDbContext<AppDbContext>(options => {
                 options.UseSqlServer(Configuration["DbContext:ConnectionString"]);
             });
+            //É¨ÃèprofileÎÄ¼þ
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

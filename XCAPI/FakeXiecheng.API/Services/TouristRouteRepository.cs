@@ -25,5 +25,9 @@ namespace FakeXiecheng.API.Services
         {
             return _context.TouristRoutes;
         }
+        public bool TouristRouteExists(Guid touristRouteId)
+        {
+            return _context.TouristRoutes.Any(t => t.Id == touristRouteId);
+        }
     }
 }
