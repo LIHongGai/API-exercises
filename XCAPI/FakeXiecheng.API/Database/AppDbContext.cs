@@ -10,9 +10,6 @@ using Newtonsoft.Json;
 
 namespace FakeXiecheng.API.Database
 {
-    /// <summary>
-    /// 数据库连接器
-    /// </summary>
     public class AppDbContext : DbContext
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) 

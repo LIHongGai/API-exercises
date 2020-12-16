@@ -2,40 +2,43 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using AutoMapper;
 using FakeXiecheng.API.Dtos;
 using FakeXiecheng.API.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using AutoMapper;
 
 namespace FakeXiecheng.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]")] // api/touristroute
     [ApiController]
     public class TouristRoutesController : ControllerBase
     {
-        //数据仓库接口（私有的）
         private ITouristRouteRepository _touristRouteRepository;
         private readonly IMapper _mapper;
-        //建立构造函数
-        public TouristRoutesController(ITouristRouteRepository touristRouteRepository,IMapper mapper)
+
+        public TouristRoutesController(
+            ITouristRouteRepository touristRouteRepository,
+            IMapper mapper
+        )
         {
             _touristRouteRepository = touristRouteRepository;
             _mapper = mapper;
         }
-        //在HTTP Git函数中使用数据仓库并提取全部旅游路线的信息
+
         [HttpGet]
         public IActionResult GerTouristRoutes()
         {
             var touristRoutesFromRepo = _touristRouteRepository.GetTouristRoutes();
-            if(touristRoutesFromRepo == null || touristRoutesFromRepo.Count() <=0)
+            if(touristRoutesFromRepo == null || touristRoutesFromRepo.Count() <= 0)
             {
-                return NotFound("没有此路线");
+                return NotFound("没有旅游路线");
             }
             var touristRoutesDto = _mapper.Map<IEnumerable<TouristRouteDto>>(touristRoutesFromRepo);
             return Ok(touristRoutesDto);
         }
-        //  api/touristroutes/{touristRouteId}
+
+        // api/touristroutes/{touristRouteId}
         [HttpGet("{touristRouteId}")]
         public IActionResult GetTouristRouteById(Guid touristRouteId)
         {
@@ -44,8 +47,25 @@ namespace FakeXiecheng.API.Controllers
             {
                 return NotFound($"旅游路线{touristRouteId}找不到");
             }
+            //var touristRouteDto = new TouristRouteDto()
+            //{
+            //    Id = touristRouteFromRepo.Id,
+            //    Title = touristRouteFromRepo.Title,
+            //    Description = touristRouteFromRepo.Description,
+            //    Price = touristRouteFromRepo.OriginalPrice * (decimal)(touristRouteFromRepo.DiscountPresent ?? 1),
+            //    CreateTime = touristRouteFromRepo.CreateTime,
+            //    UpdateTime = touristRouteFromRepo.UpdateTime,
+            //    Features = touristRouteFromRepo.Features,
+            //    Fees = touristRouteFromRepo.Fees,
+            //    Notes = touristRouteFromRepo.Notes,
+            //    Rating = touristRouteFromRepo.Rating,
+            //    TravelDays = touristRouteFromRepo.TravelDays.ToString(),
+            //    TripType = touristRouteFromRepo.TripType.ToString(),
+            //    DepartureCity = touristRouteFromRepo.DepartureCity.ToString()
+            //};
             var touristRouteDto = _mapper.Map<TouristRouteDto>(touristRouteFromRepo);
             return Ok(touristRouteDto);
         }
+
     }
 }

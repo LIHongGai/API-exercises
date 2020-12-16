@@ -21,29 +21,24 @@ namespace FakeXiecheng.API.Models
         [MaxLength(1500)]
         public string Description { get; set; }  //简介
         [Column(TypeName = "decimal(18, 2)")]
-        public decimal OriginalPrice { get; set; }   //价格（原价）
-
-        //注：在double后面加？是表明变量为空，数据初始输入的时候可有可无。
+        public decimal OriginalPrice { get; set; }  //价格（原价）
         [Range(0.0, 1.0)]
-        public double? DiscountPresent { get; set; } //折扣   
-        public DateTime CreateTime { get; set; } //发布时间
-        public DateTime? UpdateTime { get; set; } //更新时间
-        public DateTime? DepartureTime { get; set; } //出发时间
+        //注：在double后面加？是表明变量为空，数据初始输入的时候可有可无。
+        public double? DiscountPresent { get; set; }  //折扣   
+        public DateTime CreateTime { get; set; }  //发布时间
+        public DateTime? UpdateTime { get; set; }  //更新时间
+        public DateTime? DepartureTime { get; set; }   //出发时间
+        [MaxLength] 
+        public string Features { get; set; }  //卖点介绍
         [MaxLength]
-        public string Features { get; set; }//卖点介绍
-        [MaxLength]
-        public string Fees { get; set; }//费用说明
+        public string Fees { get; set; }  //费用说明
         [MaxLength]
         public string Notes { get; set; }  //票据
         public ICollection<TouristRoutePicture> TouristRoutePictures { get; set; }   //外键关系
             = new List<TouristRoutePicture>();
-        
-        public double? Rating { get; set; }//评分
-        
-        public TraveIDays? TraveIDays { get; set; }//旅游天数
-       
-        public TripType? TripType { get; set; } //旅游团
-        
-        public DepartureCity? DepartureCity { get; set; }//出发地
+        public double? Rating { get; set; }  //评分
+        public TravelDays? TravelDays { get; set; }  //旅游天数
+        public TripType? TripType { get; set; }  //旅游团
+        public DepartureCity? DepartureCity { get; set; }  //出发地
     }
 }

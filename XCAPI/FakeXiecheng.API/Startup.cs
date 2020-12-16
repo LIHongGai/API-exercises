@@ -31,12 +31,11 @@ namespace FakeXiecheng.API
         public void ConfigureServices(IServiceCollection services)
         {
             //依赖注入
-            services.AddControllers(setupAction =>
-            {
+            services.AddControllers(setupAction => {
                 setupAction.ReturnHttpNotAcceptable = true;
                 //setupAction.OutputFormatters.Add(
-                //    new XmlDataContractSerializerOutputFormatter()
-                //    );
+                //    new XmlDataContractSerializerOutputFormatter()    
+                //);
             }).AddXmlDataContractSerializerFormatters();
             services.AddTransient<ITouristRouteRepository, TouristRouteRepository>();
             //services.AddSingleton
@@ -45,7 +44,8 @@ namespace FakeXiecheng.API
             services.AddDbContext<AppDbContext>(options => {
                 options.UseSqlServer(Configuration["DbContext:ConnectionString"]);
             });
-            //扫描profile文件
+
+            // 扫描profile文件
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         }
 

@@ -8,7 +8,7 @@ using FakeXiecheng.API.Models;
 
 namespace FakeXiecheng.API.Profiles
 {
-    public class TouristRoutePictureProfile:Profile
+    public class TouristRoutePictureProfile: Profile
     {
         public TouristRoutePictureProfile()
         {
