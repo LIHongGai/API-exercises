@@ -7,18 +7,15 @@ using System.Threading.Tasks;
 
 namespace FakeXiecheng.API.Models
 {
-    /// <summary>
-    /// 旅游照片类
-    /// </summary>
     public class TouristRoutePicture
     {
         [Key] 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }   //照片编号
+        public int Id { get; set; }
         [MaxLength(100)]
-        public string Url { get; set; }   //照片数据
+        public string Url { get; set; }
         [ForeignKey("TouristRouteId")]
-        public Guid TouristRouteId { get; set; }  //旅游路线的外键关系
-        public TouristRoute TouristRoute { get; set; }   //连接属性
+        public Guid TouristRouteId { get; set; }
+        public TouristRoute TouristRoute { get; set; }
     }
 }
