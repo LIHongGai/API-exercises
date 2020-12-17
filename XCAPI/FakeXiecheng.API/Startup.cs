@@ -18,7 +18,6 @@ namespace FakeXiecheng.API
 {
     public class Startup
     {
-        //ÅäÖÃ·þÎñµÄÒÀÀµ
         private IConfiguration Configuration { get; }
 
         public Startup(IConfiguration configuration)
@@ -30,7 +29,6 @@ namespace FakeXiecheng.API
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            //ÒÀÀµ×¢Èë
             services.AddControllers(setupAction => {
                 setupAction.ReturnHttpNotAcceptable = true;
                 //setupAction.OutputFormatters.Add(

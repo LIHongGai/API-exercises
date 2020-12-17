@@ -6,25 +6,27 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+
 namespace FakeXiecheng.API.Controllers
 {
     [Route("api/touristRoutes/{touristRouteId}/pictures")]
     [ApiController]
     public class TouristRoutePicturesController : ControllerBase
     {
-        //数据仓库接口（私有的）
         private ITouristRouteRepository _touristRouteRepository;
         private IMapper _mapper;
 
-        //建立构造函数
-        public TouristRoutePicturesController(ITouristRouteRepository touristRouteRepository,IMapper mapper)
+        public TouristRoutePicturesController(
+            ITouristRouteRepository touristRouteRepository,
+            IMapper mapper
+        )
         {
             _touristRouteRepository = touristRouteRepository ??
                 throw new ArgumentNullException(nameof(touristRouteRepository));
             _mapper = mapper ??
                 throw new ArgumentNullException(nameof(mapper));
         }
-        //在HTTP Git函数中使用数据仓库并提取全部旅游路线的信息
+        //根据编号获取旅游路线照片
         [HttpGet]
         public IActionResult GetPictureListForTouristRoute(Guid touristRouteId)
         {
@@ -41,6 +43,23 @@ namespace FakeXiecheng.API.Controllers
 
             return Ok(_mapper.Map<IEnumerable<TouristRoutePictureDto>>(picturesFromRepo));
 
+        }
+
+        //根据ID获取单个相片
+        [HttpGet("{pictureId}")]
+        public IActionResult GetPicture(Guid touristRouteId, int pictureId) 
+        {
+            if (!_touristRouteRepository.TouristRouteExists(touristRouteId))
+            {
+                return NotFound("旅游线路不存在");
+            }
+
+            var pictureFromRepo = _touristRouteRepository.GetPicture(pictureId);
+            if(pictureFromRepo == null)
+            {
+                return NotFound("相片不存在");
+            }
+            return Ok(_mapper.Map<TouristRoutePictureDto>(pictureFromRepo));
         }
 
     }
